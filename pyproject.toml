@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "llvm-ebctoll"
+version = "0.1.0"
+description = "Utility to extract embedded LLVM bitcode from binaries compiled with -fembed-bitcode."
+authors = ["ergrelet <ergrelet@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "llvm_ebctoll"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+lief = "^0.14.1"
+fire = "^0.6.0"
+
+[tool.poetry.group.dev.dependencies]
+yapf = "^0.40.2"
+mypy = "^1.8.0"
+pylint = "^3.0.3"
+
+[tool.poetry.scripts]
+llvm-ebctoll = 'llvm_ebctoll.app:main'
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+no_implicit_optional = true
+ignore_missing_imports = true
+
+[tool.pylint.'MESSAGES CONTROL']
+max-line-length = 120
+disable = "C0114, C0115, C0116, I1101"
+
+[tool.pylint.TYPECHECK]
+ignored-classes = "lief"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
